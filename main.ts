@@ -64,7 +64,7 @@ scene.setTile(4, img`
     . . c c c c c b b b b b b b c .
     . . . . . . c c b b b b c c . .
     . . . . . . . . c c c c . . . .
-`)
+`, true)
 game.onUpdateInterval(1000, function () {
     item = sprites.create(img`
         . . . . . . . 6 . . . . . . . .
