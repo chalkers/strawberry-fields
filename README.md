@@ -228,6 +228,7 @@ enum SpriteKind {
     Food,
     Projectile
 }
+let mySprite2: Sprite = null
 game.onUpdateInterval(1000, function () {
 	// @highlight
    mySprite2 = sprites.create(img`
@@ -253,14 +254,14 @@ game.onUpdateInterval(1000, function () {
 
 ## Step 10 @fullscreen
 
-Let's rename the the ``||variables: mySprite2||`` to ``||variables: item||``. Click on the dropdown and click on ``||variables: New variable... ||``. Enter `item` in to the dialog box and press ``|Ok|``.
+Let's rename the the ``||variables: mySprite2||`` to ``||variables: item||``. Click on the dropdown and click on ``||variables: New variable... ||``. Enter **item** in to the dialog box and press ``|Ok|``.
 
 TODO INSERT
 
 
 ## Step 11 @fullscreen
 
-Change the ``||sprites: sprite||`` inside the ``||variables: set item to||` block to the strawberry sprite in the **Gallery**.
+Change the ``||sprites: sprite||`` inside the ``||variables: set item to||`` block to the strawberry sprite in the **Gallery**.
 
 ```blocks
 enum SpriteKind {
@@ -269,6 +270,7 @@ enum SpriteKind {
     Food,
     Projectile
 }
+let item: Sprite = null
 game.onUpdateInterval(1000, function () {
     // @highlight
     item = sprites.create(img`
@@ -303,6 +305,7 @@ enum SpriteKind {
     Food,
     Projectile
 }
+let item: Sprite = null
 game.onUpdateInterval(1000, function () {
     // @highlight
     item = sprites.create(img`
@@ -338,6 +341,7 @@ enum SpriteKind {
     Food,
     Projectile
 }
+let item: Sprite = null
 game.onUpdateInterval(1000, function () {
     item = sprites.create(img`
         . . . . . . . 6 . . . . . . . .
@@ -372,6 +376,7 @@ enum SpriteKind {
     Food,
     Projectile
 }
+let item: Sprite = null
 game.onUpdateInterval(1000, function () {
     item = sprites.create(img`
         . . . . . . . 6 . . . . . . . .
