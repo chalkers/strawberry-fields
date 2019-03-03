@@ -172,7 +172,7 @@ info.startCountdown(10)
 
 ## Step 7 @fullscreen
 
-Our game needs collectables to be complete. In the ``||game: Game ||`` section, drag the ``||game: on game update every ||`` in to the coding area.
+Our game needs collectibles to be complete. In the ``||game: Game ||`` section, drag the ``||game: on game update every ||`` in to the coding area.
 
 ```blocks
 enum SpriteKind {
@@ -258,7 +258,7 @@ game.onUpdateInterval(1000, function () {
 
 ## Step 10 @fullscreen
 
-Let's rename the the ``||variables: mySprite2||`` to ``||variables: item||``. Click on the dropdown and click on ``||variables: New variable... ||``. Enter **item** in to the dialog box and press ``|Ok|``.
+Instead of using the variable name of ``||variables: mySprite2||``, let's create a new one ``||variables: item||``. Click on the dropdown and click on ``||variables: New variable... ||``. Enter **item** in to the dialog box and press ``|Ok|``.
 
 TODO INSERT
 
@@ -491,8 +491,6 @@ enum SpriteKind {
     Food,
     Projectile
 }
-let sprite: Sprite = null
-let otherSprite: Sprite = null
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
 	
 })
@@ -512,8 +510,6 @@ enum SpriteKind {
     Food,
     Projectile
 }
-let sprite: Sprite = null
-let otherSprite: Sprite = null
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
 	
 })
@@ -532,8 +528,6 @@ enum SpriteKind {
     Food,
     Projectile
 }
-let sprite: Sprite = null
-let otherSprite: Sprite = null
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     // @highlight
     info.changeScoreBy(1)
@@ -553,23 +547,21 @@ enum SpriteKind {
     Food,
     Projectile
 }
-let sprite: Sprite = null
-let otherSprite: Sprite = null
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(1)
-    // @higlight
+    // @highlight
     otherSprite.destroy()
 })
 ```
 ## Step 21 @unplugged
 
-The basic game is complete! **Congratulations!** You can now share or even ``|Download|`` the game for compatible hardware!
+The basic game is complete! **Congratulations!** You can ``|Exit tutorial|`` and share the project with friends or even ``|Download|`` the game for compatible hardware!
+
+Instead of exiting, you also have the option to make the game more complex by adding a Taco power up and adding obstacles.
 
 ## Step 22 @fullscreen
 
-You clicked ``|Next|``` Ok you want more! You got it!
-
-Let's add a taco **POWER UP**! That when it's collected it the coundown restarts.
+Let's add a taco **POWER UP**! That when it's collected it the countdown restarts.
 
 Right click on the ``||game: on game update every ||`` block and click **Duplicate**.
 
@@ -746,7 +738,7 @@ game.onUpdateInterval(9000, function () {
 
 ## Step 25 @fullscreen
 
-We also need to update the ``||sprites: set item postion to||`` block to have the new variable name of ``||varaibles: moreTime||``.
+We also need to update the ``||sprites: set item position to||`` block to have the new variable name of ``||variables: moreTime||``.
 
 In the ``||sprites: set item position to||`` click on the ``||variables: item ||`` dropdown and select ``||variables: moreTime||``.
 
@@ -757,7 +749,6 @@ enum SpriteKind {
     Food,
     Projectile
 }
-let item: Sprite = null
 let moreTime: Sprite = null
 game.onUpdateInterval(9000, function () {
     moreTime = sprites.create(img`
@@ -860,3 +851,279 @@ game.onUpdateInterval(9000, function () {
 })
 ```
 
+## Step 28 @fullscreen
+
+Next, let's reset the countdown as the player sprite overlaps the taco sprite.
+
+Right click on the ``||sprites: on sprite of Kind Player overlaps otherSprite of kind Food||`` and click **Duplicate**. In the second block, in the kind dropdown, change the ``||sprites: Food||`` kind to ``||sprites: PowerUp||``.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile,
+    PowerUp
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    otherSprite.destroy()
+})
+// @highlight
+sprites.onOverlap(SpriteKind.Player, SpriteKind.PowerUp, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    otherSprite.destroy()
+})
+```
+
+## Step 29 @fullscreen
+
+In ``||sprites: on sprite of Kind Player overlaps otherSprite of kind PowerUp||`` block, right click on ``||info: change score by ||`` block and click **Delete Block**.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile,
+    PowerUp
+}
+// @highlight
+sprites.onOverlap(SpriteKind.Player, SpriteKind.PowerUp, function (sprite, otherSprite) {
+    otherSprite.destroy()
+})
+```
+
+## Step 30 @fullscreen
+
+Next, let's reset the countdown for when the player overlaps the taco power up.
+
+From the ``||info: Info||`` section, drag the ``||info: start countdown||`` block to the top of the ``||sprites: on sprite of Kind Player overlaps otherSprite of kind PowerUp||`` block.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile,
+    PowerUp
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.PowerUp, function (sprite, otherSprite) {
+    // @highlight
+    info.startCountdown(10)
+    otherSprite.destroy()
+})
+```
+
+## Step 31 @fullscreen
+
+Finally, let's add some obstacles. Obstacles add an extra layer of challenge for the player, adding more chance for error, but also a greater feeling of success.
+
+From the ``||scene: Scene||`` section, drag the ``||scene: set tile map to||`` block in to the ``||loops: on start ||`` block.
+
+
+```blocks
+scene.setBackgroundColor(7)
+let mySprite = sprites.create(img`
+    . . . . . f f 4 4 f f . . . . .
+    . . . . f 5 4 5 5 4 5 f . . . .
+    . . . f e 4 5 5 5 5 4 e f . . .
+    . . f b 3 e 4 4 4 4 e 3 b f . .
+    . . f 3 3 3 3 3 3 3 3 3 3 f . .
+    . f 3 3 e b 3 e e 3 b e 3 3 f .
+    . f 3 3 f f e e e e f f 3 3 f .
+    . f b b f b f e e f b f b b f .
+    . f b b e 1 f 4 4 f 1 e b b f .
+    f f b b f 4 4 4 4 4 4 f b b f f
+    f b b f f f e e e e f f f b b f
+    . f e e f b d d d d b f e e f .
+    . . e 4 c d d d d d d c 4 e . .
+    . . e f b d b d b d b b f e . .
+    . . . f f 1 d 1 d 1 d f f . . .
+    . . . . . f f b b f f . . . . .
+`, SpriteKind.Player)
+controller.moveSprite(mySprite)
+info.setScore(0)
+info.startCountdown(10)
+// @highlight
+scene.setTileMap(img`
+    . . . . . . . . . .
+    . . . . . . . . . .
+    . . . . . . . . . .
+    . . . . . . . . . .
+    . . . . . . . . . .
+    . . . . . . . . . .
+    . . . . . . . . . .
+    . . . . . . . . . .
+`)
+```
+
+## Step 32 @fullscreen
+
+Click on grey box inside the ``||scene: set tile map to||`` block choose a color, for example orange, and draw where you'd like obstacles to appear in your game.
+
+
+```blocks
+scene.setBackgroundColor(7)
+let mySprite = sprites.create(img`
+    . . . . . f f 4 4 f f . . . . .
+    . . . . f 5 4 5 5 4 5 f . . . .
+    . . . f e 4 5 5 5 5 4 e f . . .
+    . . f b 3 e 4 4 4 4 e 3 b f . .
+    . . f 3 3 3 3 3 3 3 3 3 3 f . .
+    . f 3 3 e b 3 e e 3 b e 3 3 f .
+    . f 3 3 f f e e e e f f 3 3 f .
+    . f b b f b f e e f b f b b f .
+    . f b b e 1 f 4 4 f 1 e b b f .
+    f f b b f 4 4 4 4 4 4 f b b f f
+    f b b f f f e e e e f f f b b f
+    . f e e f b d d d d b f e e f .
+    . . e 4 c d d d d d d c 4 e . .
+    . . e f b d b d b d b b f e . .
+    . . . f f 1 d 1 d 1 d f f . . .
+    . . . . . f f b b f f . . . . .
+`, SpriteKind.Player)
+controller.moveSprite(mySprite)
+info.setScore(0)
+info.startCountdown(10)
+// @highlight
+scene.setTileMap(img`
+    . . . . . . . . . .
+    . . . . . . . . . .
+    . 4 . . . . . . 4 .
+    . 4 . . . . . . 4 .
+    . 4 . . . . . . 4 .
+    . 4 . . . . . . 4 .
+    . . . . . . . . . .
+    . . . . . . . . . .
+`)
+```
+
+## Step 33 @fullscreen
+
+From the ``||scene: Scene||`` section, drag the ``||scene: set tile ||`` block in to the end of the ``||loops: on start ||`` block.
+
+In the first grey box, choose the same color you used in your tilemap. Then in the second grey box, go to the **Gallery** and select an obstacle like a rock.
+
+
+```blocks
+scene.setBackgroundColor(7)
+let mySprite = sprites.create(img`
+    . . . . . f f 4 4 f f . . . . .
+    . . . . f 5 4 5 5 4 5 f . . . .
+    . . . f e 4 5 5 5 5 4 e f . . .
+    . . f b 3 e 4 4 4 4 e 3 b f . .
+    . . f 3 3 3 3 3 3 3 3 3 3 f . .
+    . f 3 3 e b 3 e e 3 b e 3 3 f .
+    . f 3 3 f f e e e e f f 3 3 f .
+    . f b b f b f e e f b f b b f .
+    . f b b e 1 f 4 4 f 1 e b b f .
+    f f b b f 4 4 4 4 4 4 f b b f f
+    f b b f f f e e e e f f f b b f
+    . f e e f b d d d d b f e e f .
+    . . e 4 c d d d d d d c 4 e . .
+    . . e f b d b d b d b b f e . .
+    . . . f f 1 d 1 d 1 d f f . . .
+    . . . . . f f b b f f . . . . .
+`, SpriteKind.Player)
+controller.moveSprite(mySprite)
+info.setScore(0)
+info.startCountdown(10)
+scene.setTileMap(img`
+    . . . . . . . . . .
+    . . . . . . . . . .
+    . 4 . . . . . . 4 .
+    . 4 . . . . . . 4 .
+    . 4 . . . . . . 4 .
+    . 4 . . . . . . 4 .
+    . . . . . . . . . .
+    . . . . . . . . . .
+`)
+// @highlight
+scene.setTile(4, img`
+    . . . . . c c b b b . . . . . .
+    . . . . c b d d d d b . . . . .
+    . . . . c d d d d d d b b . . .
+    . . . . c d d d d d d d d b . .
+    . . . c b b d d d d d d d b . .
+    . . . c b b d d d d d d d b . .
+    . c c c c b b b b d d d b b b .
+    . c d d b c b b b b b b b b d b
+    c b b d d d b b b b b d d b d b
+    c c b b d d d d d d d b b b d c
+    c b c c c b b b b b b b d d c c
+    c c b b c c c c b d d d b c c b
+    . c c c c c c c c c c c b b b b
+    . . c c c c c b b b b b b b c .
+    . . . . . . c c b b b b c c . .
+    . . . . . . . . c c c c . . . .
+`)
+```
+
+# Step 34 @fullscreen
+
+The player can move through the obstacles. They're not doing their job!
+
+Click on the **+** on the ``||scene: set tile ||`` and switch the ``||scene: with wall||`` ``||loops: on||``.
+
+```blocks
+scene.setBackgroundColor(7)
+let mySprite = sprites.create(img`
+    . . . . . f f 4 4 f f . . . . .
+    . . . . f 5 4 5 5 4 5 f . . . .
+    . . . f e 4 5 5 5 5 4 e f . . .
+    . . f b 3 e 4 4 4 4 e 3 b f . .
+    . . f 3 3 3 3 3 3 3 3 3 3 f . .
+    . f 3 3 e b 3 e e 3 b e 3 3 f .
+    . f 3 3 f f e e e e f f 3 3 f .
+    . f b b f b f e e f b f b b f .
+    . f b b e 1 f 4 4 f 1 e b b f .
+    f f b b f 4 4 4 4 4 4 f b b f f
+    f b b f f f e e e e f f f b b f
+    . f e e f b d d d d b f e e f .
+    . . e 4 c d d d d d d c 4 e . .
+    . . e f b d b d b d b b f e . .
+    . . . f f 1 d 1 d 1 d f f . . .
+    . . . . . f f b b f f . . . . .
+`, SpriteKind.Player)
+controller.moveSprite(mySprite)
+info.setScore(0)
+info.startCountdown(10)
+scene.setTileMap(img`
+    . . . . . . . . . .
+    . . . . . . . . . .
+    . 4 . . . . . . 4 .
+    . 4 . . . . . . 4 .
+    . 4 . . . . . . 4 .
+    . 4 . . . . . . 4 .
+    . . . . . . . . . .
+    . . . . . . . . . .
+`)
+// @highlight
+scene.setTile(4, img`
+    . . . . . c c b b b . . . . . .
+    . . . . c b d d d d b . . . . .
+    . . . . c d d d d d d b b . . .
+    . . . . c d d d d d d d d b . .
+    . . . c b b d d d d d d d b . .
+    . . . c b b d d d d d d d b . .
+    . c c c c b b b b d d d b b b .
+    . c d d b c b b b b b b b b d b
+    c b b d d d b b b b b d d b d b
+    c c b b d d d d d d d b b b d c
+    c b c c c b b b b b b b d d c c
+    c c b b c c c c b d d d b c c b
+    . c c c c c c c c c c c b b b b
+    . . c c c c c b b b b b b b c .
+    . . . . . . c c b b b b c c . .
+    . . . . . . . . c c c c . . . .
+`, true)
+```
+
+# Congratulations @fullscreen
+
+**Congratulations**, you've created your first full game.
+
+You've learned how to use ``||sprites: Sprites||``, ``||scene: Tiles||``, modify ``||info: Scores||`` and  ``||info: Countdowns||`` and trigger code based on which sprites overlap.
+
+You can share the project with friends or even ``|Download|`` the game for compatible hardware!
