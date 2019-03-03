@@ -58,7 +58,8 @@ mySprite = sprites.create(img`
 
 Choose your character! Click on the grey box in ``||variables:set mySprite to||`` block. If you're feeling artistic you can use the **Editor** to make you're own character. Alternatively pick a character from the **Gallery**.
 
-TODO INSERT GIF
+![Gallery](https://raw.githubusercontent.com/chalkers/strawberry-fields-assets/master/gallery.gif)
+
 
 ## Step 4 @fullscreen
 
@@ -260,7 +261,7 @@ game.onUpdateInterval(1000, function () {
 
 Instead of using the variable name of ``||variables: mySprite2||``, let's create a new one ``||variables: item||``. Click on the dropdown and click on ``||variables: New variable... ||``. Enter **item** in to the dialog box and press ``|Ok|``.
 
-TODO INSERT
+![New Variable](https://raw.githubusercontent.com/chalkers/strawberry-fields-assets/master/new-variable.gif)
 
 
 ## Step 11 @fullscreen
@@ -517,7 +518,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 
 ## Step 19 @fullscreen
 
-When the player ```||variables: sprite||`` touches the strawberry ``||variables: otherSprite||`` we want the score to increment by 1 and for the strawberry to disappear.
+When the player ``||variables: sprite||`` touches the strawberry ``||variables: otherSprite||`` we want the score to increment by 1 and for the strawberry to disappear.
 
 In the ``||info: Info||`` section, drag the ``||info: change score by ||`` block in to the overlay block.
 
@@ -923,6 +924,13 @@ From the ``||scene: Scene||`` section, drag the ``||scene: set tile map to||`` b
 
 
 ```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile,
+    PowerUp
+}
 scene.setBackgroundColor(7)
 let mySprite = sprites.create(img`
     . . . . . f f 4 4 f f . . . . .
@@ -964,6 +972,13 @@ Click on grey box inside the ``||scene: set tile map to||`` block choose a color
 
 
 ```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile,
+    PowerUp
+}
 scene.setBackgroundColor(7)
 let mySprite = sprites.create(img`
     . . . . . f f 4 4 f f . . . . .
@@ -1007,6 +1022,13 @@ In the first grey box, choose the same color you used in your tilemap. Then in t
 
 
 ```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile,
+    PowerUp
+}
 scene.setBackgroundColor(7)
 let mySprite = sprites.create(img`
     . . . . . f f 4 4 f f . . . . .
@@ -1060,13 +1082,20 @@ scene.setTile(4, img`
 `)
 ```
 
-# Step 34 @fullscreen
+## Step 34 @fullscreen
 
 The player can move through the obstacles. They're not doing their job!
 
 Click on the **+** on the ``||scene: set tile ||`` and switch the ``||scene: with wall||`` ``||loops: on||``.
 
 ```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile,
+    PowerUp
+}
 scene.setBackgroundColor(7)
 let mySprite = sprites.create(img`
     . . . . . f f 4 4 f f . . . . .
@@ -1120,7 +1149,7 @@ scene.setTile(4, img`
 `, true)
 ```
 
-# Congratulations @fullscreen
+## Congratulations @fullscreen
 
 **Congratulations**, you've created your first full game.
 
