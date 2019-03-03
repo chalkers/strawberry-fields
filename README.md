@@ -4,7 +4,7 @@
 
 TODO INSERT GIF OF GAME
 
-In this tutorial, you will build a simple game with the goal of collecting strawberries before time runs out. When a player eats a strawberry the score goes up. When a player eats a taco time power up the countdown restarts!
+In this tutorial, you will build a simple game with the goal of collecting strawberries before time runs out. When a player eats a strawberry the score goes up.
 
 ## Step 1 @fullscreen
 
@@ -96,7 +96,9 @@ controller.moveSprite(mySprite)
 ```
 ## Step 5 @fullscreen
 
-Scores give the player a goal and a target to for them to improve upon. In the ``||info: Info ||`` section, drag ``||info: set score to ||`` block to the end of the ``||loops:on start||`` block.
+Scores give the player a goal and a target to for them to improve upon. 
+
+In the ``||info: Info ||`` section, drag ``||info: set score to ||`` block to the end of the ``||loops:on start||`` block.
 
 
 ```blocks
@@ -132,7 +134,9 @@ info.setScore(0)
 
 ## Step 6 @fullscreen
 
-Urgency adds another level of challenge to a game. A countdown timer can add such a challenge. In the ``||info: Info ||`` section, drag the ``||info: start countdown ||`` to the end of the ``||loops:on start||`` block.
+Urgency adds another level of challenge to a game. A countdown timer can add such a challenge. 
+
+In the ``||info: Info ||`` section, drag the ``||info: start countdown ||`` to the end of the ``||loops:on start||`` block.
 
 ```blocks
 enum SpriteKind {
@@ -405,7 +409,7 @@ game.onUpdateInterval(1000, function () {
 
 All the strawberries are in the top left hand corner. By changing the values in the ``||math: pick random||`` blocks we can get a wider range of positions for each strawberry appearing every second.
 
-In the ``||math: pick random||`` block in the ``||sprites: x||`` change the values from 0 and 10 **to** 10 and 110.  
+In the ``||math: pick random||`` block in the ``||sprites: x||`` change the values from 0 and 10 **to** 10 and 150.  
 
 ```blocks
 enum SpriteKind {
@@ -435,15 +439,13 @@ game.onUpdateInterval(1000, function () {
         . c c c c c c c . . . . . . . .
     `, SpriteKind.Food)
     // @highlight
-    item.setPosition(
-        // @highlight
-        Math.randomRange(10, 150), Math.randomRange(0, 10))
+    item.setPosition(Math.randomRange(10, 150), Math.randomRange(0, 10))
 })
 ```
 
-## Step 16 
+## Step 16 @fullscreen
 
-In the ``||math: pick random||`` block in the ``||sprites: y||`` change the values from 0 and 10 **to** 10 and 150.
+In the ``||math: pick random||`` block in the ``||sprites: y||`` change the values from 0 and 10 **to** 10 and 110.
 
 ```blocks
 enum SpriteKind {
@@ -473,8 +475,388 @@ game.onUpdateInterval(1000, function () {
         . c c c c c c c . . . . . . . .
     `, SpriteKind.Food)
     // @highlight
-    item.setPosition(Math.randomRange(10, 150),
-    // @highlight 
-    Math.randomRange(10, 110))
+    item.setPosition(Math.randomRange(10, 150), Math.randomRange(10, 110))
 })
 ```
+## Step 17 @fullscreen
+
+When the player moves around and touches the strawberries nothing happens. We need to test if the player overlaps or collides with another sprite.
+
+In the ``||sprites: Sprites||`` section, drag the ``||sprites: on sprite of kind Player overlaps otherSprite of kind Player||`` block in to the coding area.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+let sprite: Sprite = null
+let otherSprite: Sprite = null
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
+	
+})
+```
+
+## Step 18 @fullscreen
+
+When a ``||variables: sprite ||`` touches another sprite, ``||variables: otherSprite||``, and it's the correct kind the code gets executed.
+
+Currenlty the other ``||variables: otherSprite||`` is set to kind ``||sprites: Player||``. This need to be ``||sprites: Food||`` to match the strawberry sprite type.
+
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+let sprite: Sprite = null
+let otherSprite: Sprite = null
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+	
+})
+```
+
+## Step 19 @fullscreen
+
+When the player ```||variables: sprite||`` touches the strawberry ``||variables: otherSprite||`` we want the score to increment by 1 and for the strawberry to disappear.
+
+In the ``||info: Info||`` section, drag the ``||info: change score by ||`` block in to the overlay block.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+let sprite: Sprite = null
+let otherSprite: Sprite = null
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    // @highlight
+    info.changeScoreBy(1)
+})
+```
+
+## Step 20 @fullscreen
+
+Moving the player over each strawberry now increments the score but it doesn't disappear. We need to **DESTROY** it!
+
+Head over to the ``||sprites: Sprites||`` section, and find the ``||sprites: destroy ||`` block and drag it in to the ``||sprites: overlay||`` block. Drag the ``||variables: otherSprite||`` bubble over the ``||variables: mySprite||`` bubble.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+let sprite: Sprite = null
+let otherSprite: Sprite = null
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    // @higlight
+    otherSprite.destroy()
+})
+```
+## Step 21 @unplugged
+
+The basic game is complete! **Congratulations!** You can now share or even ``|Download|`` the game for compatible hardware!
+
+## Step 22 @fullscreen
+
+You clicked ``|Next|``` Ok you want more! You got it!
+
+Let's add a taco **POWER UP**! That when it's collected it the coundown restarts.
+
+Right click on the ``||game: on game update every ||`` block and click **Duplicate**.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+let item: Sprite = null
+game.onUpdateInterval(1000, function () {
+    item = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+})
+// @highlight
+game.onUpdateInterval(1000, function () {
+    item = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+})
+```
+
+## Step 23 @fullscreen
+
+We're going to have the taco power up to appear every 9 seconds. Change the value from 1000 to 9000 miliseconds (ms) in the second ``||game: on game update every ||`` block.
+
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+let item: Sprite = null
+game.onUpdateInterval(1000, function () {
+    item = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+})
+// @highlight
+game.onUpdateInterval(9000, function () {
+    item = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+})
+```
+
+## Step 24 @fullscreen
+
+It's good practice to change the names of sprites that do different things. Let's change the name (variable) from item to ``||variables: moreTime||``.
+
+In the second ``||game: on game update every ||`` block, within the ``||variables: set item to||`` block, click on the ``||variables: item||`` dropdown and click on ``||variables: New variable...||`` and give it a new name **moreTime**.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+let item: Sprite = null
+let moreTime: Sprite = null
+game.onUpdateInterval(1000, function () {
+    item = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+})
+game.onUpdateInterval(9000, function () {
+    // @highlight
+    moreTime = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+})
+```
+
+## Step 25 @fullscreen
+
+We also need to update the ``||sprites: set item postion to||`` block to have the new variable name of ``||varaibles: moreTime||``.
+
+In the ``||sprites: set item position to||`` click on the ``||variables: item ||`` dropdown and select ``||variables: moreTime||``.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+let item: Sprite = null
+let moreTime: Sprite = null
+game.onUpdateInterval(9000, function () {
+    moreTime = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+    // @highlight
+    moreTime.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+})
+```
+
+## Step 26 @fullscreen
+
+It's taco time. The ``||variables: moreTime||`` looks like a strawberry!
+
+Change the ``||sprites: sprite||`` to the taco from the **Gallery** from the sprite editor.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+let moreTime: Sprite = null
+game.onUpdateInterval(9000, function () {
+    // @highlight
+    moreTime = sprites.create(img`
+        . . . . . . . e e e e . . . . .
+        . . . . . e e 4 5 5 5 e e . . .
+        . . . . e 4 5 6 2 2 7 6 6 e . .
+        . . . e 5 6 6 7 2 2 6 4 4 4 e .
+        . . e 5 2 2 7 6 6 4 5 5 5 5 4 .
+        . e 5 6 2 2 8 8 5 5 5 5 5 4 5 4
+        . e 5 6 7 7 8 5 4 5 4 5 5 5 5 4
+        e 4 5 8 6 6 5 5 5 5 5 5 4 5 5 4
+        e 5 c e 8 5 5 5 4 5 5 5 5 5 5 4
+        e 5 c c e 5 4 5 5 5 4 5 5 5 e .
+        e 5 c c 5 5 5 5 5 5 5 5 4 e . .
+        e 5 e c 5 4 5 4 5 5 5 e e . . .
+        e 5 e e 5 5 5 5 5 4 e . . . . .
+        4 5 4 e 5 5 5 5 e e . . . . . .
+        . 4 5 4 5 5 4 e . . . . . . . .
+        . . 4 4 e e e . . . . . . . . .
+    `, SpriteKind.Food)
+    moreTime.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+})
+```
+
+## Step 27 @fullscreen
+
+While a taco in real life is ``||sprites: Food||``, in our game it's a ``||sprites: PowerUp||``. By having a new kind of sprite it allows us to detect when our player overlays with the taco and run different code - to reset the countdown.
+
+In the ``||variables: set moreTime to||`` block, click the ``||sprites: Food||`` dropdown and click ``||sprites: Add a new kind...||``. Enter **PowerUp** in the dialog box and click ``|OK|``.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile,
+    PowerUp
+}
+let moreTime: Sprite = null
+game.onUpdateInterval(9000, function () {
+    // @highlight
+    moreTime = sprites.create(img`
+        . . . . . . . e e e e . . . . .
+        . . . . . e e 4 5 5 5 e e . . .
+        . . . . e 4 5 6 2 2 7 6 6 e . .
+        . . . e 5 6 6 7 2 2 6 4 4 4 e .
+        . . e 5 2 2 7 6 6 4 5 5 5 5 4 .
+        . e 5 6 2 2 8 8 5 5 5 5 5 4 5 4
+        . e 5 6 7 7 8 5 4 5 4 5 5 5 5 4
+        e 4 5 8 6 6 5 5 5 5 5 5 4 5 5 4
+        e 5 c e 8 5 5 5 4 5 5 5 5 5 5 4
+        e 5 c c e 5 4 5 5 5 4 5 5 5 e .
+        e 5 c c 5 5 5 5 5 5 5 5 4 e . .
+        e 5 e c 5 4 5 4 5 5 5 e e . . .
+        e 5 e e 5 5 5 5 5 4 e . . . . .
+        4 5 4 e 5 5 5 5 e e . . . . . .
+        . 4 5 4 5 5 4 e . . . . . . . .
+        . . 4 4 e e e . . . . . . . . .
+    `, SpriteKind.PowerUp)
+    moreTime.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+})
+```
+
