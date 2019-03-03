@@ -98,11 +98,6 @@ controller.moveSprite(mySprite)
 
 Scores give the player a goal and a target to for them to improve upon. In the ``||info: Info ||`` section, drag ``||info: set score to ||`` block to the end of the ``||loops:on start||`` block.
 
-### ~ hint
- In ``||info: Info ||``, drag ``||info: set score to ||`` block to the end of the ``||loops:on start||`` block.
-
-### ~
-
 
 ```blocks
 enum SpriteKind {
@@ -134,6 +129,13 @@ controller.moveSprite(mySprite)
 // @highlight
 info.setScore(0)
 ```
+
+### ~ hint
+
+ In ``||info: Info ||``, drag ``||info: set score to ||`` block to the end of the ``||loops:on start||`` block.
+
+### ~
+
 ## Step 6 @fullscreen
 
 Urgency adds another level of challenge to a game. A countdown timer can add such a challenge. In the ``||info: Info ||`` section, drag the ``||info: start countdown ||`` to the end of the ``||loops:on start||`` block.
