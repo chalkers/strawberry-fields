@@ -97,7 +97,7 @@ controller.moveSprite(mySprite)
 ```
 ## Step 5 @fullscreen
 
-Scores give the player a goal and a target to for them to improve upon. 
+Scores give the player a goal and a target for them to improve upon. 
 
 In the ``||info: Info ||`` section, drag ``||info: set score to ||`` block to the end of the ``||loops:on start||`` block.
 
@@ -301,7 +301,7 @@ game.onUpdateInterval(1000, function () {
 
 ## Step 12 @fullscreen
 
-The strawberry ``||sprites: sprite||`` needs to be ``||sprites: of kind||`` ``||sprites: Food||``. You can select ``||sprites: Food||`` from the drop down menu next to ``||sprites: Player||``.
+The strawberry ``||sprites: sprite||`` needs to be ``||sprites: of kind||`` ``||sprites: Food||``. You can select ``||sprites: Food||`` from the drop down menu that currently has ``||sprites: Player||`` selected.
 
 ```blocks
 enum SpriteKind {
@@ -336,7 +336,7 @@ game.onUpdateInterval(1000, function () {
 
 ## Step 13 @fullscreen
 
-We have a problem, our strawberry is appearing on top of the player sprite. Drag ``||sprites: set mySprite position to||`` the ``||game: on game update every||``. Change ``||variables: mySprite||`` to ``||variables: item||`` in the drop down menu.
+We have a problem, our strawberry is appearing on top of the player sprite. From the ``||sprites: Sprites||`` section, drag ``||sprites: set mySprite position to||`` the ``||game: on game update every||``. Change ``||variables: mySprite||`` to ``||variables: item||`` in the drop down menu.
 
 
 ```blocks
@@ -499,9 +499,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherS
 
 ## Step 18 @fullscreen
 
-When a ``||variables: sprite ||`` touches another sprite, ``||variables: otherSprite||``, and it's the correct kind the code gets executed.
+When a ``||variables: sprite ||`` touches another sprite, ``||variables: otherSprite||``, and it's the correct kind, the code gets executed.
 
-Currenlty the other ``||variables: otherSprite||`` is set to kind ``||sprites: Player||``. This need to be ``||sprites: Food||`` to match the strawberry sprite type.
+Currently the other ``||variables: otherSprite||`` is set to kind ``||sprites: Player||``. This need to be ``||sprites: Food||`` to match the strawberry sprite type.
 
 
 ```blocks
@@ -520,7 +520,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 
 When the player ``||variables: sprite||`` touches the strawberry ``||variables: otherSprite||`` we want the score to increment by 1 and for the strawberry to disappear.
 
-In the ``||info: Info||`` section, drag the ``||info: change score by ||`` block in to the overlay block.
+In the ``||info: Info||`` section, drag the ``||info: change score by ||`` block in to the overlap block.
 
 ```blocks
 enum SpriteKind {
@@ -539,7 +539,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 
 Moving the player over each strawberry now increments the score but it doesn't disappear. We need to **DESTROY** it!
 
-Head over to the ``||sprites: Sprites||`` section, and find the ``||sprites: destroy ||`` block and drag it in to the ``||sprites: overlay||`` block. Drag the ``||variables: otherSprite||`` bubble over the ``||variables: mySprite||`` bubble.
+Head over to the ``||sprites: Sprites||`` section, and find the ``||sprites: destroy ||`` block and drag it in to the ``||sprites: overlap||`` block. Drag the ``||variables: otherSprite||`` bubble over the ``||variables: mySprite||`` bubble.
 
 ```blocks
 enum SpriteKind {
@@ -562,7 +562,7 @@ Instead of exiting, you also have the option to make the game more complex by ad
 
 ## Step 22 @fullscreen
 
-Let's add a taco **POWER UP**! That when it's collected it the countdown restarts.
+Let's add a taco **POWER UP**! Let's make it so the countdown is restarted when the taco is collected.
 
 Right click on the ``||game: on game update every ||`` block and click **Duplicate**.
 
@@ -593,7 +593,7 @@ game.onUpdateInterval(1000, function () {
         e e e 2 e e c e c c c . . . . .
         . c c c c c c c . . . . . . . .
     `, SpriteKind.Food)
-    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+    item.setPosition(Math.randomRange(10, 150), Math.randomRange(10, 110))
 })
 // @highlight
 game.onUpdateInterval(1000, function () {
@@ -615,13 +615,13 @@ game.onUpdateInterval(1000, function () {
         e e e 2 e e c e c c c . . . . .
         . c c c c c c c . . . . . . . .
     `, SpriteKind.Food)
-    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+    item.setPosition(Math.randomRange(10, 150), Math.randomRange(10, 110))
 })
 ```
 
 ## Step 23 @fullscreen
 
-We're going to have the taco power up to appear every 9 seconds. Change the value from 1000 to 9000 miliseconds (ms) in the second ``||game: on game update every ||`` block.
+We're going to have the taco power up to appear every 9 seconds. Change the value from 1000 to 9000 milliseconds (ms) in the second ``||game: on game update every ||`` block.
 
 
 ```blocks
@@ -651,7 +651,7 @@ game.onUpdateInterval(1000, function () {
         e e e 2 e e c e c c c . . . . .
         . c c c c c c c . . . . . . . .
     `, SpriteKind.Food)
-    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+    item.setPosition(Math.randomRange(10, 150), Math.randomRange(10, 110))
 })
 // @highlight
 game.onUpdateInterval(9000, function () {
@@ -673,7 +673,7 @@ game.onUpdateInterval(9000, function () {
         e e e 2 e e c e c c c . . . . .
         . c c c c c c c . . . . . . . .
     `, SpriteKind.Food)
-    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+    item.setPosition(Math.randomRange(10, 150), Math.randomRange(10, 110))
 })
 ```
 
@@ -711,7 +711,7 @@ game.onUpdateInterval(1000, function () {
         e e e 2 e e c e c c c . . . . .
         . c c c c c c c . . . . . . . .
     `, SpriteKind.Food)
-    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+    item.setPosition(Math.randomRange(10, 150), Math.randomRange(10, 110))
 })
 game.onUpdateInterval(9000, function () {
     // @highlight
@@ -733,7 +733,7 @@ game.onUpdateInterval(9000, function () {
         e e e 2 e e c e c c c . . . . .
         . c c c c c c c . . . . . . . .
     `, SpriteKind.Food)
-    item.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+    item.setPosition(Math.randomRange(10, 150), Math.randomRange(10, 110))
 })
 ```
 
@@ -771,7 +771,7 @@ game.onUpdateInterval(9000, function () {
         . c c c c c c c . . . . . . . .
     `, SpriteKind.Food)
     // @highlight
-    moreTime.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+    moreTime.setPosition(Math.randomRange(10, 150), Math.randomRange(10, 110))
 })
 ```
 
@@ -809,13 +809,13 @@ game.onUpdateInterval(9000, function () {
         . 4 5 4 5 5 4 e . . . . . . . .
         . . 4 4 e e e . . . . . . . . .
     `, SpriteKind.Food)
-    moreTime.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+    moreTime.setPosition(Math.randomRange(10, 150), Math.randomRange(10, 110))
 })
 ```
 
 ## Step 27 @fullscreen
 
-While a taco in real life is ``||sprites: Food||``, in our game it's a ``||sprites: PowerUp||``. By having a new kind of sprite it allows us to detect when our player overlays with the taco and run different code - to reset the countdown.
+While a taco in real life is ``||sprites: Food||``, in our game it's a ``||sprites: PowerUp||``. By having a new kind of sprite it allows us to detect when our player overlaps with the taco and run different code - to reset the countdown.
 
 In the ``||variables: set moreTime to||`` block, click the ``||sprites: Food||`` dropdown and click ``||sprites: Add a new kind...||``. Enter **PowerUp** in the dialog box and click ``|OK|``.
 
@@ -848,7 +848,7 @@ game.onUpdateInterval(9000, function () {
         . 4 5 4 5 5 4 e . . . . . . . .
         . . 4 4 e e e . . . . . . . . .
     `, SpriteKind.PowerUp)
-    moreTime.setPosition(Math.randomRange(20, 150), Math.randomRange(10, 110))
+    moreTime.setPosition(Math.randomRange(10, 150), Math.randomRange(10, 110))
 })
 ```
 
