@@ -2,7 +2,7 @@
 
 ## Introduction @unplugged
 
-TODO INSERT GIF OF GAME
+![Strawberry Fields Game](https://raw.githubusercontent.com/chalkers/strawberry-fields-assets/master/simple-game.gif)
 
 In this tutorial, you will build a simple game with the goal of collecting strawberries before time runs out. When a player eats a strawberry the score goes up.
 
