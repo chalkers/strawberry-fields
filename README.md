@@ -56,13 +56,13 @@ mySprite = sprites.create(img`
 
 ## Step 3 @fullscreen
 
-Choose your character! Click on the grey box in ``||variables:set mySprite to||`` block. If you're feeling artistic you can use the **Editor** to make you're own or pick a character from the **Gallery**.
+Choose your character! Click on the grey box in ``||variables:set mySprite to||`` block. If you're feeling artistic you can use the **Editor** to make you're own character. Alternatively pick a character from the **Gallery**.
 
 TODO INSERT GIF
 
 ## Step 4 @fullscreen
 
-Let's make the character move around the screen with arrow keys. From the ``||controller:Controller`` section drag the ``||controller:move mySprite with buttons||`` to the end of the ``||loops:on start||`` block. 
+Let's make the character move around the screen with arrow keys. From the ``||controller:Controller||`` section drag the ``||controller:move mySprite with buttons||`` to the end of the ``||loops:on start||`` block. 
 
 
 ```blocks
@@ -100,7 +100,8 @@ Scores give the player a goal and a target to for them to improve upon. In the `
 
 ### ~ hint
  In ``||info: Info ||``, drag ``||info: set score to ||`` block to the end of the ``||loops:on start||`` block.
-###
+
+### ~
 
 
 ```blocks
