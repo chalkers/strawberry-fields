@@ -130,12 +130,6 @@ controller.moveSprite(mySprite)
 info.setScore(0)
 ```
 
-### ~ hint
-
- In ``||info: Info ||``, drag ``||info: set score to ||`` block to the end of the ``||loops:on start||`` block.
-
-### ~
-
 ## Step 6 @fullscreen
 
 Urgency adds another level of challenge to a game. A countdown timer can add such a challenge. In the ``||info: Info ||`` section, drag the ``||info: start countdown ||`` to the end of the ``||loops:on start||`` block.
