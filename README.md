@@ -165,3 +165,235 @@ info.setScore(0)
 // @highlight
 info.startCountdown(10)
 ```
+
+## Step 7 @fullscreen
+
+Our game needs collectables to be complete. In the ``||game: Game ||`` section, drag the ``||game: on game update every ||`` in to the coding area.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+scene.setBackgroundColor(7)
+mySprite = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, SpriteKind.Player)
+controller.moveSprite(mySprite)
+info.setScore(0)
+info.startCountdown(10)
+
+// @highlight
+game.onUpdateInterval(500, function () {
+	
+})
+```
+
+## Step 8 @fullscreen
+
+We'll make a strawberry appear every second (1000 miliseconds). Change `500` to `1000` in the ``||game: on game update every ||`` block.
+
+```blocks
+// @highlight
+game.onUpdateInterval(1000, function () {
+	
+})
+```
+
+## Step 9 @fullscreen
+
+In ``||sprites: Sprites||`` section, drag the ``||variables:set mySprite2 to||`` block inside the ``||game: on game update every ||`` block.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+game.onUpdateInterval(1000, function () {
+	// @highlight
+   mySprite2 = sprites.create(img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `, SpriteKind.Player)
+})
+```
+
+## Step 10 @fullscreen
+
+Let's rename the the ``||variables: mySprite2||`` to ``||variables: item||``. Click on the dropdown and click on ``||variables: New variable... ||``. Enter `item` in to the dialog box and press ``|Ok|``.
+
+TODO INSERT
+
+
+## Step 11 @fullscreen
+
+Change the ``||sprites: sprite||`` inside the ``||variables: set item to||` block to the strawberry sprite in the **Gallery**.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+game.onUpdateInterval(1000, function () {
+    // @highlight
+    item = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Player)
+})
+```
+
+## Step 12 @fullscreen
+
+The strawberry ``||sprites: sprite||`` needs to be ``||sprites: of kind||`` ``||sprites: Food||``. You can select ``||sprites: Food||`` from the drop down menu next to ``||sprites: Player||``.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+game.onUpdateInterval(1000, function () {
+    // @highlight
+    item = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+})
+```
+
+## Step 13 @fullscreen
+
+We have a problem, our strawberry is appearing on top of the player sprite. Drag ``||sprites: set mySprite position to||`` the ``||game: on game update every||``. Change ``||variables: mySprite||`` to ``||variables: item||`` in the drop down menu.
+
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+game.onUpdateInterval(1000, function () {
+    item = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+    // @highlight
+    item.setPosition(0, 0)
+})
+```
+## Step 14 @fullscreen
+
+In the math ``||math: Math ||`` section, drag one ``||math: pick random||`` block in to the ``||sprites: x||`` and another ``||math: pick random||`` block in to ``||sprites: y||``.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+game.onUpdateInterval(1000, function () {
+    item = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+    item.setPosition(Math.randomRange(0, 10), Math.randomRange(0, 10))
+})
+```
+
+## Step 15 @fullscreen
+
