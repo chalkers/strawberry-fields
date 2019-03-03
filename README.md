@@ -396,9 +396,85 @@ game.onUpdateInterval(1000, function () {
         e e e 2 e e c e c c c . . . . .
         . c c c c c c c . . . . . . . .
     `, SpriteKind.Food)
+    // @highlight
     item.setPosition(Math.randomRange(0, 10), Math.randomRange(0, 10))
 })
 ```
 
 ## Step 15 @fullscreen
 
+All the strawberries are in the top left hand corner. By changing the values in the ``||math: pick random||`` blocks we can get a wider range of positions for each strawberry appearing every second.
+
+In the ``||math: pick random||`` block in the ``||sprites: x||`` change the values from 0 and 10 **to** 10 and 110.  
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+let item: Sprite = null
+game.onUpdateInterval(1000, function () {
+    item = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+    // @highlight
+    item.setPosition(
+        // @highlight
+        Math.randomRange(10, 150), Math.randomRange(0, 10))
+})
+```
+
+## Step 16 
+
+In the ``||math: pick random||`` block in the ``||sprites: y||`` change the values from 0 and 10 **to** 10 and 150.
+
+```blocks
+enum SpriteKind {
+    Player,
+    Enemy,
+    Food,
+    Projectile
+}
+let item: Sprite = null
+game.onUpdateInterval(1000, function () {
+    item = sprites.create(img`
+        . . . . . . . 6 . . . . . . . .
+        . . . . . . 8 6 6 . . . 6 8 . .
+        . . . e e e 8 8 6 6 . 6 7 8 . .
+        . . e 2 2 2 2 e 8 6 6 7 6 . . .
+        . e 2 2 4 4 2 7 7 7 7 7 8 6 . .
+        . e 2 4 4 2 6 7 7 7 6 7 6 8 8 .
+        e 2 4 5 2 2 6 7 7 6 2 7 7 6 . .
+        e 2 4 4 2 2 6 7 6 2 2 6 7 7 6 .
+        e 2 4 2 2 2 6 6 2 2 2 e 7 7 6 .
+        e 2 4 2 2 4 2 2 2 4 2 2 e 7 6 .
+        e 2 4 2 2 2 2 2 2 2 2 2 e c 6 .
+        e 2 2 2 2 2 2 2 4 e 2 e e c . .
+        e e 2 e 2 2 4 2 2 e e e c . . .
+        e e e e 2 e 2 2 e e e c . . . .
+        e e e 2 e e c e c c c . . . . .
+        . c c c c c c c . . . . . . . .
+    `, SpriteKind.Food)
+    // @highlight
+    item.setPosition(Math.randomRange(10, 150),
+    // @highlight 
+    Math.randomRange(10, 110))
+})
+```
